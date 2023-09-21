@@ -22,6 +22,10 @@ class TuringMachine:
         for r in range(steps):
             if verbose: print(tape)
             tape, num, state = self.step(tape, num, state)
+            if state == -1:
+                if verbose: print("HALT")
+                break
+
         if verbose: print(tape)
         return tape
 
@@ -34,7 +38,7 @@ def _random_rule(size: int):
     return {
         "new_bit": random.choice([0, 1]),
         "new_dir": random.choice([-1, 1]),
-        "new_state": random.randrange(size)
+        "new_state": random.randrange(-1, size)
     }
 
 
